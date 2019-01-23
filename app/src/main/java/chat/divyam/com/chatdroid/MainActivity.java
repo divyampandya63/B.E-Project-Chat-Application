@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.quickblox.auth.session.QBSettings;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.users.QBUsers;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initializeFreamwork();
 
         btnLogin = (Button)findViewById(R.id.main_btnSignIn);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -69,5 +72,10 @@ public class MainActivity extends AppCompatActivity {
 
         edtUsername = (EditText)findViewById(R.id.main_edtUsername);
         edtPassword = (EditText)findViewById(R.id.main_edtPassword);
+    }
+
+    public void initializeFreamwork() {
+        QBSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
+        QBSettings.getInstance().setAccountKey(ACCOUNT_KEY);
     }
 }
