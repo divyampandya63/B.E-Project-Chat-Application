@@ -25,4 +25,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //Adding dependencies
+    compile 'com.quickblox:quickblox-android-sdk-core:3.3.0'
+    compile 'com.quickblox:quickblox-android-sdk-chat:3.3.0'
+    compile 'com.github.lguipeng:BubbleView:1.0.1'
 }
