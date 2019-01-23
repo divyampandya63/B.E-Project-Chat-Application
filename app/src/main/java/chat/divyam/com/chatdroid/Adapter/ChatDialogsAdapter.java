@@ -8,7 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.quickblox.chat.model.QBChatDialog;
+
 import java.util.ArrayList;
+
+import chat.divyam.com.chatdroid.R;
 
 public class ChatDialogsAdapter {
 
@@ -65,7 +71,8 @@ public class ChatDialogsAdapter {
                     .endConfig()
                     .round();
 
-//            Lay chu cai dau tien trong Dialog chat de tao avatar chat
+
+//Get the first letter in Dialog substance to create avatar nature
             TextDrawable drawable = builder.build(txtTitle.getText().toString().substring(0, 1).toUpperCase(), randomColor);
             imageView.setImageDrawable(drawable);
 
