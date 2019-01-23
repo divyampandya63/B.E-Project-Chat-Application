@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onSuccess(QBUser qbUser, Bundle bundle) {
                         Toast.makeText(getBaseContext(), "Login Successful", Toast.LENGTH_SHORT).show();
 
-                      //  Intent intent = new Intent(MainActivity.this, ChatDialogsActivity.class);
-                        //intent.putExtra("username", username);
-                       // intent.putExtra("password", password);
-                       // startActivity(intent);
-                       // finish();
+                        Intent intent = new Intent(MainActivity.this, ChatDialogsActivity.class);
+                        intent.putExtra("username", username);
+                        intent.putExtra("password", password);
+                        startActivity(intent);
+                        finish();
                     }
 
                     @Override

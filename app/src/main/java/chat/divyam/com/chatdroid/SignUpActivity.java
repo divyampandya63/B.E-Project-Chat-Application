@@ -2,11 +2,14 @@ package chat.divyam.com.chatdroid;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.quickblox.auth.QBAuth;
+import com.quickblox.auth.session.QBSession;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.users.QBUsers;
@@ -21,6 +24,8 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        registerSession();
 
 
         btnSignup = (Button)findViewById(R.id.signup_btnSignUp);
@@ -59,5 +64,20 @@ public class SignUpActivity extends AppCompatActivity {
         edtUsername = (EditText)findViewById(R.id.signup_edtUsername);
         edtPassword = (EditText)findViewById(R.id.signup_edtPassword);
         edtFullname = (EditText)findViewById(R.id.signup_edtFullname);
+    }
+
+    //Code to define unauthorized users
+    private void registerSession() {
+        QBAuth.createSession().performAsync(new QBEntityCallback<QBSession>() {
+            @Override
+            public void onSuccess(QBSession qbSession, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onError(QBResponseException e) {
+                Log.e("Error", e.getMessage());
+            }
+        });
     }
 }
