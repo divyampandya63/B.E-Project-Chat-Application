@@ -13,15 +13,21 @@ import com.quickblox.auth.session.BaseService;
 import com.quickblox.auth.session.QBSession;
 import com.quickblox.chat.QBChatService;
 import com.quickblox.chat.QBIncomingMessagesManager;
+import com.quickblox.chat.QBRestChatService;
 import com.quickblox.chat.QBSystemMessagesManager;
 import com.quickblox.chat.model.QBChatDialog;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.BaseServiceException;
 import com.quickblox.core.exception.QBResponseException;
+import com.quickblox.core.request.QBRequestGetBuilder;
 import com.quickblox.users.QBUsers;
 import com.quickblox.users.model.QBUser;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import chat.divyam.com.chatdroid.Adapter.ChatDialogsAdapter;
 
 public class ChatDialogsActivity extends AppCompatActivity {
 
@@ -36,7 +42,10 @@ public class ChatDialogsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_dialogs);
 
         createSessionForChat();
+
+        loadChatDialogs();
     }
+
 
     private void createSessionForChat() {
         final ProgressDialog mDialog = new ProgressDialog(ChatDialogsActivity.this);
@@ -94,5 +103,43 @@ public class ChatDialogsActivity extends AppCompatActivity {
                 Log.e("ERROR", ""+e.getMessage());
             }
         });
+
+        private void loadChatDialogs() {
+            QBRequestGetBuilder requestBuilder = new QBRequestGetBuilder();
+            requestBuilder.setLimit(100);
+
+            QBRestChatService.getChatDialogs(null, requestBuilder).performAsync(new QBEntityCallback<ArrayList<QBChatDialog>>() {
+                @Override
+                public void onSuccess(ArrayList<QBChatDialog> qbChatDialogs, Bundle bundle) {
+                    QBChatDialogHolder.getInstance().putDialogs(qbChatDialogs);
+
+                    Set<String> setIds = new HashSet<String>();
+                    for (QBChatDialog chatDialog:qbChatDialogs)
+                        setIds.add(chatDialog.getDialogId());
+
+                    QBRestChatService.getTotalUnreadMessagesCount(setIds, QBUnreadMessageHolder.getInstance().getBundle())
+                            .performAsync(new QBEntityCallback<Integer>() {
+                                @Override
+                                public void onSuccess(Integer integer, Bundle bundle) {
+                                    QBUnreadMessageHolder.getInstance().setBundle(bundle);
+
+                                    ChatDialogsAdapter adapter = new ChatDialogsAdapter(getBaseContext(), QBChatDialogHolder.getInstance().getAllChatDialogs());
+                                    firstChatDialogs.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+
+                                @Override
+                                public void onError(QBResponseException e) {
+                                    Log.e("ERROR", e.getMessage());
+                                }
+                            });
+                }
+
+                @Override
+                public void onError(QBResponseException e) {
+                    Log.e("ERROR", e.getMessage());
+                }
+            });
+        }
     }
 }

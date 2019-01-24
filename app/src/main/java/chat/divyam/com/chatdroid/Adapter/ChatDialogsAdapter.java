@@ -71,8 +71,7 @@ public class ChatDialogsAdapter {
                     .endConfig()
                     .round();
 
-
-//Get the first letter in Dialog substance to create avatar nature
+            //Get the first character from chat dialogue title to create chat dialogue image
             TextDrawable drawable = builder.build(txtTitle.getText().toString().substring(0, 1).toUpperCase(), randomColor);
             imageView.setImageDrawable(drawable);
 
