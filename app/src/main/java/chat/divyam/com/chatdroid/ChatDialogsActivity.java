@@ -41,6 +41,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import chat.divyam.com.chatdroid.Adapter.ChatDialogsAdapter;
+import chat.divyam.com.chatdroid.Common.Common;
 import chat.divyam.com.chatdroid.Holder.QBUsersHolder;
 
 public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMessageListener, QBChatDialogMessageListener {
@@ -167,7 +168,7 @@ public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMe
 
     private void createSessionForChat() {
         final ProgressDialog mDialog = new ProgressDialog(ChatDialogsActivity.this);
-        mDialog.setMessage("Please stay tuned..");
+        mDialog.setMessage("Please waiting ...");
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
 
@@ -175,6 +176,7 @@ public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMe
         username = getIntent().getStringExtra("username");
         password = getIntent().getStringExtra("password");
 
+        //load all user and save to cache
         QBUsers.getUsers(null).performAsync(new QBEntityCallback<ArrayList<QBUser>>() {
             @Override
             public void onSuccess(ArrayList<QBUser> qbUsers, Bundle bundle) {
