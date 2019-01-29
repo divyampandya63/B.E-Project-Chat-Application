@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 
 import chat.divyam.com.chatdroid.R;
 
-public class ChatDialogsAdapter {
+public class ChatDialogsAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<QBChatDialog> qbChatDialogs;

@@ -14,11 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.androidprochatapplication.Adapter.ChatDialogsAdapter;
-import com.androidprochatapplication.Common.Common;
-import com.androidprochatapplication.Holder.QBChatDialogHolder;
-import com.androidprochatapplication.Holder.QBUnreadMessageHolder;
-import com.androidprochatapplication.Holder.QBUsersHolder;
+
 import com.quickblox.auth.QBAuth;
 import com.quickblox.auth.session.BaseService;
 import com.quickblox.auth.session.QBSession;
@@ -43,6 +39,8 @@ import com.quickblox.users.model.QBUser;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import chat.divyam.com.chatdroid.Adapter.ChatDialogsAdapter;
 
 public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMessageListener, QBChatDialogMessageListener {
     FloatingActionButton floatingActionButton;
@@ -168,7 +166,7 @@ public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMe
 
     private void createSessionForChat() {
         final ProgressDialog mDialog = new ProgressDialog(ChatDialogsActivity.this);
-        mDialog.setMessage("Xin vui long cho doi ...");
+        mDialog.setMessage("Please stay tuned..");
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
 
