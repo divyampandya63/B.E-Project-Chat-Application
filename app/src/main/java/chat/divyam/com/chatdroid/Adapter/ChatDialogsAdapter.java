@@ -76,15 +76,15 @@ public class ChatDialogsAdapter extends BaseAdapter {
             TextDrawable drawable = builder.build(txtTitle.getText().toString().substring(0, 1).toUpperCase(), randomColor);
             imageView.setImageDrawable(drawable);
 
-            TextDrawable.IBuilder unreadBuilder = TextDrawable.builder().beginConfig()
-                    .withBorder(4)
-                    .endConfig()
-                    .round();
-            int unread_count = QBUnreadMessageHolder.getInstance().getBundle().getInt(qbChatDialogs.get(position).getDialogId());
-            if (unread_count > 0){
-                TextDrawable unread_drawable = builder.build(""+unread_count, Color.RED);
-                imageUnread.setImageDrawable(unread_drawable);
-            }
+//            TextDrawable.IBuilder unreadBuilder = TextDrawable.builder().beginConfig()
+//                    .withBorder(4)
+//                    .endConfig()
+//                    .round();
+//            int unread_count = QBUnreadMessageHolder.getInstance().getBundle().getInt(qbChatDialogs.get(position).getDialogId());
+//            if (unread_count > 0){
+//                TextDrawable unread_drawable = builder.build(""+unread_count, Color.RED);
+//                imageUnread.setImageDrawable(unread_drawable);
+//            }
         }
         return view;
     }

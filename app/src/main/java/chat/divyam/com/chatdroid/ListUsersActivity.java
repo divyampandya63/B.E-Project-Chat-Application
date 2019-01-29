@@ -27,6 +27,8 @@ import org.jivesoftware.smack.SmackException;
 import java.util.ArrayList;
 
 import chat.divyam.com.chatdroid.Adapter.ListUserAdapter;
+import chat.divyam.com.chatdroid.Common.Common;
+import chat.divyam.com.chatdroid.Holder.QBUsersHolder;
 
 public class ListUsersActivity extends AppCompatActivity {
 
@@ -88,7 +90,7 @@ public class ListUsersActivity extends AppCompatActivity {
             @Override
             public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
                 mDialog.dismiss();
-                Toast.makeText(getBaseContext(), "Tao Chat Nhom Thanh Cong !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Created group chat successfully", Toast.LENGTH_SHORT).show();
                 finish();
             }
 
@@ -101,7 +103,7 @@ public class ListUsersActivity extends AppCompatActivity {
 
     private void createPrivateChat(SparseBooleanArray checkedItemPositions) {
         mDialog = new ProgressDialog(ListUsersActivity.this);
-        mDialog.setMessage("Xin vui long cho ...");
+        mDialog.setMessage("Please waiting ...");
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
 
@@ -115,7 +117,7 @@ public class ListUsersActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
                         mDialog.dismiss();
-                        Toast.makeText(getBaseContext(), "Tao Chat Rieng Tu Thanh Cong !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "Created private chat successfully", Toast.LENGTH_SHORT).show();
 
                         qbSystemMessagesManager = QBChatService.getInstance().getSystemMessagesManager();
                         QBChatMessage qbChatMessage = new QBChatMessage();

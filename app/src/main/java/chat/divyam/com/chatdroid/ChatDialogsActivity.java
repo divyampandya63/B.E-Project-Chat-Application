@@ -41,6 +41,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import chat.divyam.com.chatdroid.Adapter.ChatDialogsAdapter;
+import chat.divyam.com.chatdroid.Holder.QBUsersHolder;
 
 public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMessageListener, QBChatDialogMessageListener {
     FloatingActionButton floatingActionButton;
