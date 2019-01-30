@@ -43,6 +43,7 @@ import java.util.Set;
 import chat.divyam.com.chatdroid.Adapter.ChatDialogsAdapter;
 import chat.divyam.com.chatdroid.Common.Common;
 import chat.divyam.com.chatdroid.Holder.QBChatDialogHolder;
+import chat.divyam.com.chatdroid.Holder.QBUnreadMessageHolder;
 import chat.divyam.com.chatdroid.Holder.QBUsersHolder;
 
 public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMessageListener, QBChatDialogMessageListener {
@@ -101,7 +102,7 @@ public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMe
 
 
         toolbar = (Toolbar)findViewById(R.id.chat_dialog_toolbar);
-        toolbar.setTitle("Android Pro Chat Application");
+        toolbar.setTitle("Chatdroid");
         setSupportActionBar(toolbar);
 
     }
@@ -138,14 +139,17 @@ public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMe
             public void onSuccess(ArrayList<QBChatDialog> qbChatDialogs, Bundle bundle) {
                 QBChatDialogHolder.getInstance().putDialogs(qbChatDialogs);
 
+                //Unread settings
                 Set<String> setIds = new HashSet<String>();
                 for (QBChatDialog chatDialog:qbChatDialogs)
                     setIds.add(chatDialog.getDialogId());
-
+                //Get message unread
                 QBRestChatService.getTotalUnreadMessagesCount(setIds, QBUnreadMessageHolder.getInstance().getBundle())
                         .performAsync(new QBEntityCallback<Integer>() {
                             @Override
                             public void onSuccess(Integer integer, Bundle bundle) {
+
+                                //save to cache
                                 QBUnreadMessageHolder.getInstance().setBundle(bundle);
 
                                 ChatDialogsAdapter adapter = new ChatDialogsAdapter(getBaseContext(), QBChatDialogHolder.getInstance().getAllChatDialogs());
@@ -228,9 +232,13 @@ public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMe
 
     @Override
     public void processMessage(QBChatMessage qbChatMessage) {
+        //Put dialogue to cache
+        //Because we send system message with content is DialogId
+        //So we can get dialog by DialogId
         QBRestChatService.getChatDialogById(qbChatMessage.getBody()).performAsync(new QBEntityCallback<QBChatDialog>() {
             @Override
             public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
+                //Put to cache
                 QBChatDialogHolder.getInstance().putDialog(qbChatDialog);
                 ArrayList<QBChatDialog> adapterSource = QBChatDialogHolder.getInstance().getAllChatDialogs();
                 ChatDialogsAdapter adapters = new ChatDialogsAdapter(getBaseContext(), adapterSource);
