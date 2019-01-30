@@ -72,7 +72,7 @@ public class ChatMessageActivity extends AppCompatActivity implements QBChatDial
                 }catch (SmackException.NotConnectedException e){
                     e.printStackTrace();
                 }
-
+                //Fix private chat don't show message
                 if (qbChatDialog.getType() == QBDialogType.PRIVATE){
                     QBChatMessagesHolder.getInstance().putMessage(qbChatDialog.getDialogId(), chatMessage);
                     ArrayList<QBChatMessage> messages = QBChatMessagesHolder.getInstance().getChatMessageByDialogId(chatMessage.getDialogId());
@@ -80,7 +80,7 @@ public class ChatMessageActivity extends AppCompatActivity implements QBChatDial
                     firstChatMessage.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
-
+                //Remove text from edittext
                 edtContent.setText("");
                 edtContent.setFocusable(true);
             }
@@ -114,6 +114,8 @@ public class ChatMessageActivity extends AppCompatActivity implements QBChatDial
 
         incomingMessage = QBChatService.getInstance().getIncomingMessagesManager();
         incomingMessage.addDialogMessageListener(new QBChatDialogMessageListener() {
+
+            //Put message to cache
             @Override
             public void processMessage(String s, QBChatMessage qbChatMessage, Integer integer) {
                 QBChatMessagesHolder.getInstance().putMessage(qbChatMessage.getDialogId(), qbChatMessage);
@@ -128,7 +130,7 @@ public class ChatMessageActivity extends AppCompatActivity implements QBChatDial
                 Log.e("ERORR", e.getMessage());
             }
         });
-
+        //Add join group to enable chat
         if(qbChatDialog.getType() == QBDialogType.PUBLIC_GROUP || qbChatDialog.getType() == QBDialogType.GROUP){
             DiscussionHistory discussionHistory = new DiscussionHistory();
             discussionHistory.setMaxStanzas(0);

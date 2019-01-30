@@ -118,7 +118,7 @@ public class ListUsersActivity extends AppCompatActivity {
                     public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
                         mDialog.dismiss();
                         Toast.makeText(getBaseContext(), "Created private chat successfully", Toast.LENGTH_SHORT).show();
-
+                        //Send system message to recipient id user
                         qbSystemMessagesManager = QBChatService.getInstance().getSystemMessagesManager();
                         QBChatMessage qbChatMessage = new QBChatMessage();
                         qbChatMessage.setBody(qbChatDialog.getDialogId());

@@ -42,6 +42,7 @@ import java.util.Set;
 
 import chat.divyam.com.chatdroid.Adapter.ChatDialogsAdapter;
 import chat.divyam.com.chatdroid.Common.Common;
+import chat.divyam.com.chatdroid.Holder.QBChatDialogHolder;
 import chat.divyam.com.chatdroid.Holder.QBUsersHolder;
 
 public class ChatDialogsActivity extends AppCompatActivity implements QBSystemMessageListener, QBChatDialogMessageListener {
