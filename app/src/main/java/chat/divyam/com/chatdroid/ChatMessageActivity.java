@@ -38,6 +38,7 @@ public class ChatMessageActivity extends AppCompatActivity implements QBChatDial
     QBIncomingMessagesManager incomingMessage;
     ChatMessageAdapter adapter;
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -58,6 +59,7 @@ public class ChatMessageActivity extends AppCompatActivity implements QBChatDial
         intiViews();
         initChatDialogs();
         retrieveMessage();
+
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
